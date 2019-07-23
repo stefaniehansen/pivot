@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx sjs ./test/test-script.js --out-file ./dist/test-script.js"
+    "start": "npx node index.js --human-language spanish --programming-language javascript --input test"
   },
   "repository": {
     "type": "git",
