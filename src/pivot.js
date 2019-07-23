@@ -1,22 +1,24 @@
+'lang sweet.js';
 import { fromKeyword } from '@sweet-js/helpers' for syntax
 
-syntax para = ctx => {
+
+export syntax para = function(ctx) {
   return #`for`;
 };
 
-syntax funcion = ctx => {
+export syntax funcion = function(ctx) {
   return #`function`;
 };
 
-syntax mientras = ctx => {
+export syntax mientras = function(ctx) {
   return #`while`;
 };
 
-syntax retorna = ctx => {
+export syntax retorna = function(ctx) {
     let ident = ctx.next().value;
     return #`return ${ident}`;
 };
 
-syntax variable = ctx => {
+export syntax variable = function(ctx) {
   return #`var`;
 };
