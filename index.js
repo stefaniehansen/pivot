@@ -19,6 +19,14 @@ var argv = require('yargs')
     .alias('h', 'help')
     .argv;
 
+// Get target Directory and create if not exists.
+// Read files one by one.
+// Construct target directory path using current directory.
+// Create directories as we traverse if they don't exist.
+// Copy current file to target directory.
+// Read file from target directory and add import at top.
+// Run the target file through Sweet.js and produce transpiled files (overwrite intermediate file).
+
 // Command line arguments provided by user
 let {outDir, input, humanLanguage, programmingLanguage} = argv;
 
@@ -71,16 +79,6 @@ function transpileFile(entry) {
             console.log(err)
         })
 }
-
-// Get target Directory and create if not exists.
-// Read one file.
-// Strip off path from current working directory up until the input dir
-// Add path from target working directory up until the output dir.
-// Create dir if not exists.
-// Copy current file to target dir.
-// Read file from target dir and add write import at top.
-// Run through npx.
-
 
 // Recursive directory scan
 async function read() {
