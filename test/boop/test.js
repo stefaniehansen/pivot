@@ -1,0 +1,1 @@
+variable miVariable = 3;

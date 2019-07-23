@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx sjs ./test/test-script.js"
+    "start": "npx node index.js --human-language spanish --programming-language javascript --input test"
   },
   "repository": {
     "type": "git",
@@ -18,8 +18,13 @@
   },
   "homepage": "https://github.com/stefaniehansen/pivot#readme",
   "devDependencies": {
-    "npx": "^10.2.0",
     "@sweet-js/cli": "^3.0.13",
-    "@sweet-js/helpers": "^4.0.1"
+    "@sweet-js/helpers": "^4.0.1",
+    "npx": "^10.2.0"
+  },
+  "dependencies": {
+    "concat": "^1.0.3",
+    "readdirp": "^3.1.1",
+    "yargs": "^13.3.0"
   }
 }
