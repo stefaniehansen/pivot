@@ -22,5 +22,10 @@
     "@sweet-js/cli": "^3.0.13",
     "@sweet-js/helpers": "^4.0.1",
     "npx": "^10.2.0"
+  },
+  "dependencies": {
+    "concat": "^1.0.3",
+    "readdirp": "^3.1.1",
+    "yargs": "^13.3.0"
   }
 }
