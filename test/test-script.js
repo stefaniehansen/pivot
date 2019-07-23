@@ -48,6 +48,33 @@ syntax si = ctx => {
     return result
    };
    
+// Try catch finally
+syntax intenta = ctx => {
+    // Try
+    let tryContent = ctx.next().value;
+
+    // Catch
+    let catchKeyword = ctx.next().value;
+    if (unwrap(catchKeyword).value !== 'captura') {
+        throw new Error('Try is missing catch');
+    }
+    let catchExpression = ctx.next().value;
+    let catchContent = ctx.next().value;
+
+    let result = #`try ${tryContent} catch ${catchExpression} ${catchContent}`
+
+    // Finally (optional)
+    let finallyKeyword = ctx.next().value;
+    if (finallyKeyword) {
+        if (unwrap(finallyKeyword).value !== 'finalmente') {
+            throw new Error('Final part of try has to be finally');
+        }
+        let finallyContent = ctx.next().value;
+        result = result.concat(#`finally ${finallyContent}`)
+    }
+
+    return result
+};
 
 
 // Funcion calls:
@@ -105,4 +132,13 @@ funcion testIfElse(isItTrue){
     sino {
         console.log("papanada");
     }
+}
+
+// Try Catch
+intenta {
+    console.log("a");
+} captura (e) {
+    console.log("b");
+} finalmente {
+    console.log("c");
 }
