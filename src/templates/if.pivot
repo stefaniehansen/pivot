@@ -15,6 +15,7 @@ syntax ##if## = ctx => {
     isItElseIf = ctx.next().value;
     result = result.concat(#`else if ${elseIfExpression} ${elseIfContext}`)
     }
+    
     if (unwrap(elseKeyword).value === '##else##') {
         // At this point the isItElseIf contains the else context
         let elseContext = isItElseIf;
@@ -22,4 +23,4 @@ syntax ##if## = ctx => {
     }
     
     return result
-   };
+};
