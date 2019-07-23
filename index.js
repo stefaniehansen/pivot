@@ -22,7 +22,7 @@ var argv = require('yargs')
 // Command line arguments provided by user
 let {outDir, input, humanLanguage, programmingLanguage} = argv;
 
-// If the user doesn't specify a target directory, use the current working directory
+// If the user doesn't specify an output directory, use dist-pivot by default
 if (!outDir) {
     outDir = 'dist-pivot';
 }
