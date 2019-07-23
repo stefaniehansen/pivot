@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx babel --plugins ./src/babel-plugin-pivot-transpiler ./test/test-script.js"
+    "start": "npx babel --plugins ./src/babel-plugin-pivot-transpiler ./test/test-script.js",
+    "sweet": "npx sjs ./src/sweet-js-test.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,8 @@
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
-    "npx": "^10.2.0"
+    "npx": "^10.2.0",
+    "@sweet-js/cli": "^3.0.13",
+    "@sweet-js/helpers": "^4.0.1"
   }
 }
