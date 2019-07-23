@@ -1,4 +1,4 @@
-import { isKeyword } from '@sweet-js/helpers' for syntax
+import { unwrap, isKeyword } from '@sweet-js/helpers' for syntax
 
 syntax para = ctx => {
   return #`for`;
@@ -23,13 +23,24 @@ syntax variable = ctx => {
 };
 
 syntax si = ctx => {
-    return #`if`;
-};
-
-syntax sino = ctx => {
-
-    return #`other`;
-};
+    let ifExpression = ctx.next().value;
+    let ifContext = ctx.next().value;
+    let result = #`if ${ifExpression} ${ifContext}`;
+    console.log(result)
+    let elseKeyword = ctx.next().value;
+    while (unwrap(elseKeyword).value === 'sinosi') {
+    let elseExpression = ctx.next().value;
+    let elseContext = ctx.next().value;
+    elseKeyword = ctx.next().value;
+    result = result.concat(#`else if ${elseExpression} ${elseContext}`)
+    }
+    if (unwrap(elseKeyword).value === 'sino') {
+    let elseContext = ctx.next().value;
+    result = result.concat(#`else ${elseContext}`)
+    }
+    
+    return result
+   };
 
 // Funcion calls:
 
@@ -65,8 +76,24 @@ funcion fibonacci(num){
 
 funcion testIfElse(isItTrue){
     si(isItTrue) {
-        console.log("It is true");
-    } sino {
-        console.log("It should not go here");
+        console.log("It is true, but why?");
+        si(isItTrue){
+            console.log("nested if");
+        }
+        sinosi(isItTrue){
+            console.log("wattt");
+        } 
+        sino {
+            console.log("wat");
+        }
+    } sinosi (isItTrue == false) {
+        console.log("More ifs???");
+        console.log("anotherconsole");
+    } 
+    sinosi (false){
+        console.log("How did it get here? not good with computers");
+    }
+    sino{
+        console.log("papanada");
     }
 }
