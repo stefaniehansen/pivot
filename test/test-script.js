@@ -1,4 +1,4 @@
-import { unwrap, isKeyword } from '@sweet-js/helpers' for syntax
+import { unwrap, isKeyword, fromIdentifier } from '@sweet-js/helpers' for syntax
 
 syntax para = ctx => {
   return #`for`;
@@ -26,21 +26,29 @@ syntax si = ctx => {
     let ifExpression = ctx.next().value;
     let ifContext = ctx.next().value;
     let result = #`if ${ifExpression} ${ifContext}`;
-    console.log(result)
+    // Extract the else in case we are about to see an else if.
     let elseKeyword = ctx.next().value;
-    while (unwrap(elseKeyword).value === 'sinosi') {
-    let elseExpression = ctx.next().value;
-    let elseContext = ctx.next().value;
+    
+    let isItElseIf = ctx.next().value;
+    
+    while (unwrap(elseKeyword).value === 'else' && 
+           unwrap(isItElseIf).value === 'si') {
+    let elseIfExpression = ctx.next().value;
+    let elseIfContext = ctx.next().value;
     elseKeyword = ctx.next().value;
-    result = result.concat(#`else if ${elseExpression} ${elseContext}`)
+    isItElseIf = ctx.next().value;
+    result = result.concat(#`else if ${elseIfExpression} ${elseIfContext}`)
     }
     if (unwrap(elseKeyword).value === 'sino') {
-    let elseContext = ctx.next().value;
-    result = result.concat(#`else ${elseContext}`)
+        // At this point the isItElseIf contains the else context
+        let elseContext = isItElseIf;
+        result = result.concat(#`else ${elseContext}`)
     }
     
     return result
    };
+   
+
 
 // Funcion calls:
 
@@ -80,20 +88,21 @@ funcion testIfElse(isItTrue){
         si(isItTrue){
             console.log("nested if");
         }
-        sinosi(isItTrue){
+        sino si(isItTrue){
             console.log("wattt");
         } 
         sino {
             console.log("wat");
         }
-    } sinosi (isItTrue == false) {
+    } 
+    sino si (isItTrue == false) {
         console.log("More ifs???");
         console.log("anotherconsole");
     } 
-    sinosi (false){
+    sino si (false) {
         console.log("How did it get here? not good with computers");
     }
-    sino{
+    sino {
         console.log("papanada");
     }
 }
