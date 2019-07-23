@@ -19,28 +19,30 @@ var argv = require('yargs')
     .alias('h', 'help')
     .argv;
 
-// find matching map
-// add template imports to top of file via fs.writeFile
-// create transpiled/dist folder for consumer
-// then exec recursively on each file in directory provided after adding imports, output matching file in transpiled/dist directory
+// Command line arguments provided by user
+let {outDir, input, humanLanguage, programmingLanguage} = argv;
 
-// Command line arguments
-let {outDir, input, humanLanguage, programmingLanguage} = argv
-
-let directoryToScan = process.cwd();
-if (input) {
-    directoryToScan = `${process.cwd()}/${input}`;
+// If the user doesn't specify a target directory, use the current working directory
+if (!outDir) {
+    outDir = 'dist-pivot';
 }
 
-// Find the rule file for the language mapping
-let syntaxRulesFile = `${__dirname}/rules/${programmingLanguage}-${humanLanguage}.js`
-let imports = `{para, funcion, mientras, retorna, variable}`
-let importStatement = `import ${imports} from '${syntaxRulesFile}'`
+// Find the syntax rule file for the language mapping.
+let syntaxRulesFile = `${__dirname}/rules/${programmingLanguage}-${humanLanguage}.js`;
+// TODO: This should be dynamically constructed from the syntax rules.
+let imports = `{para, funcion, mientras, retorna, variable}`;
+let importStatement = `import ${imports} from '${syntaxRulesFile}'`;
 
 function makeDirIfNotExists(dir) {
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);
     }
+}
+
+function isJavascriptFile(fileName) {
+    let fileNameArray = fileName.split('.');
+    let ext = fileNameArray[fileNameArray.length - 1];
+    return ext === 'js';
 }
 
 // Keep track of current target directory (mirrors current working directory)
@@ -49,6 +51,25 @@ function getTargetDir(path) {
     let currentPosition = path.fullPath.split(input)[1];
     let targetPath = `${basePath}${outDir}${currentPosition}`;
     return targetPath;
+}
+
+function transpileFile(entry) {
+    // Where are we writing the target files?
+    let targetDir = getTargetDir(entry);
+    let targetFilePath = `${targetDir}${entry.basename}`;
+    makeDirIfNotExists(targetDir);
+    // Write syntax rule imports into target dir files
+    fsProm.writeFile(targetFilePath, importStatement, 'utf8')
+    // Concatenate target dir files containing import statements with base file content
+        .then(concatFiles([targetFilePath, entry.fullPath], targetFilePath))
+        // Run the transpiler on each file and write over it in target directory.
+        .then(exec(`npx sjs ${targetFilePath} --out-file ${targetFilePath}`, function (err, stdout, stderr) {
+            if (err) throw err;
+            else console.log(stdout);
+        }))
+        .catch(err => {
+            console.log(err)
+        })
 }
 
 // Get target Directory and create if not exists.
@@ -63,26 +84,13 @@ function getTargetDir(path) {
 
 // Recursive directory scan
 async function read() {
-    // Create initial output directory
+    // Create initial output directory (using command line input)
     makeDirIfNotExists(outDir);
     // Read input directory recursively
-    for await (const entry of readdirp(directoryToScan)) {
-        // Where are we writing the target files?
-        let targetDir = getTargetDir(entry);
-        let targetFilePath = `${targetDir}${entry.basename}`;
-        makeDirIfNotExists(targetDir);
-        // Write syntax rule imports into target dir files
-        fsProm.writeFile(targetFilePath, importStatement, 'utf8')
-            // Concatenate target dir files containing import statements with base file content
-            .then(concatFiles([targetFilePath, entry.fullPath], targetFilePath))
-            // Run the transpiler on each file and write over it in target directory.
-            .then(exec(`npx sjs ${targetFilePath} --out-file ${targetFilePath}`,  function (err, stdout, stderr) {
-                if (err) throw err;
-                else console.log(stdout);
-            }))
-            .catch(err => {
-                console.log(err)
-            })
+    for await (const entry of readdirp(input)) {
+        if (isJavascriptFile(entry.basename)) {
+            transpileFile(entry)
+        }
     }
 }
 
