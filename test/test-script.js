@@ -25,10 +25,6 @@ syntax variable = ctx => {
 // ACTUAL SCRIPT STARTS HERE:
 
 fibonacci(2);
-  
-para(i = 0; i < 5; i++){
-    console.log(i);
-}
 
 funcion fibonacci(num){
     variable a = 1, b = 0, temp;
