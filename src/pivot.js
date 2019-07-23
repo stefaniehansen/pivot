@@ -22,3 +22,11 @@ export syntax retorna = ctx => {
 export syntax variable = ctx => {
   return #`var`;
 };
+
+export syntax parar = ctx => {
+  return #`break`;
+};
+
+export syntax continuar = ctx => {
+  return #`continue`;
+};
