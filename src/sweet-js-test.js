@@ -1,4 +1,4 @@
-import { fromKeyword } from '@sweet-js/helpers' for syntax\
+import { fromKeyword } from '@sweet-js/helpers' for syntax
 
 syntax para = ctx => {
   return #`for`;
