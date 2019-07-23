@@ -9,7 +9,7 @@ var fs = require('fs');
 // then exec recursively on each file in directory provided after adding imports, output matching file in transpiled/dist directory
 
 
-exec('npx sjs ./test/test-script.js', function(err, stdout, stderr) {
+exec(`npx sjs ./test/test-script.js --out-file ./dist/${fileName}`, function(err, stdout, stderr) {
     // Add outFile flag to output file of the same name in dist folder
     if (err) throw err;
     else console.log(stdout);
