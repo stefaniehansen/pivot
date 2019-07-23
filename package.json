@@ -18,8 +18,6 @@
   },
   "homepage": "https://github.com/stefaniehansen/pivot#readme",
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.5.5",
     "npx": "^10.2.0",
     "@sweet-js/cli": "^3.0.13",
     "@sweet-js/helpers": "^4.0.1"
