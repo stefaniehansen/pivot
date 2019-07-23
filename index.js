@@ -62,7 +62,6 @@ function getTargetDir(path) {
 }
 
 function transpileFile(entry) {
-    // Where are we writing the target files?
     let targetDir = getTargetDir(entry);
     let targetFilePath = `${targetDir}${entry.basename}`;
     makeDirIfNotExists(targetDir);
