@@ -2,23 +2,23 @@
 import { fromKeyword } from '@sweet-js/helpers' for syntax
 
 
-export syntax para = function(ctx) {
+export syntax para = ctx => {
   return #`for`;
 };
 
-export syntax funcion = function(ctx) {
+export syntax funcion = ctx => {
   return #`function`;
 };
 
-export syntax mientras = function(ctx) {
+export syntax mientras = ctx => {
   return #`while`;
 };
 
-export syntax retorna = function(ctx) {
+export syntax retorna = ctx => {
     let ident = ctx.next().value;
     return #`return ${ident}`;
 };
 
-export syntax variable = function(ctx) {
+export syntax variable = ctx => {
   return #`var`;
 };
