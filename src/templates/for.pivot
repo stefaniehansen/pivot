@@ -1,3 +1,9 @@
-syntax ##for## = ctx => {
-    return #`for`;
-  };
+syntax para = ctx => {
+    let forExpression = ctx.next().value;
+    let forContext = ctx.next().value;
+    console.log(forExpression);
+    console.log("\n");
+    console.log(forContext);
+    let result = #`for ${ifExpression} ${ifContext}`;
+  return result;
+};

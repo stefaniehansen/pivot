@@ -1,15 +1,12 @@
 import { unwrap, isKeyword, fromIdentifier } from '@sweet-js/helpers' for syntax
 
-syntax para = ctx => {
-  return #`for`;
-};
 
 syntax funcion = ctx => {
-  return #`function`;
+    return #`function`;
 };
 
 syntax mientras = ctx => {
-  return #`while`;
+    return #`while`;
 };
 
 syntax retorna = ctx => {
@@ -17,8 +14,23 @@ syntax retorna = ctx => {
     return #`return ${ident}`;
 };
 
+syntax para = ctx => {
+    // let forExpression = ctx.contextify(ctx.next().value);
+    // for (let stx of forExpression){
+    //     console.log(unwrap(stx).value);
+    // }
+    let forExpression = ctx.next().value;
+    let forContext = ctx.next().value;
+ 
+    let result = #`for ${forExpression} ${forContext}`;
+ 
+    return result;
+};
+
 syntax variable = ctx => {
     let ident = ctx.next().value;
+    console.log("Using variable");
+    console.log(ident);
     return #`var ${ident}`;
 };
 
@@ -77,13 +89,7 @@ syntax intenta = ctx => {
 };
 
 
-// Funcion calls:
-
-fibonacci(2);
-//testVarInForLoop(5);
-testIfElse(true);
-
-// FUNCION definitions start here:
+// CODE TO PARSE STARTS HERE
 
 funcion fibonacci(num){
     variable a = 1, b = 0, temp;
@@ -102,12 +108,12 @@ funcion fibonacci(num){
     retorna unaFuncion;
 }
 
-// funcion testVarInForLoop(loops){
-//     para(variable i = 0; i < loops; i++)
-//     {
-//         console.log("It Works");
-//     }
-// }
+funcion testVarInForLoop(loops){
+    for(variable i = 0; i < loops; i++)
+    {
+        console.log("It Works");
+    }
+}
 
 funcion testIfElse(isItTrue){
     si(isItTrue) {
