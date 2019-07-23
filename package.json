@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx babel --plugins ./src/babel-plugin-pivot-transpiler ./test/test-script.js",
-    "sweet": "npx sjs ./src/sweet-js-test.js"
+    "start": "npx sjs ./src/sweet-js-test.js"
   },
   "repository": {
     "type": "git",
