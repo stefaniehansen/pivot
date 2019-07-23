@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx babel --plugins ./src/babel-plugin-pivot-transpiler ./test/test-script.js",
-    "sweet": "npx sjs ./src/sweet-js-test.js"
+    "sweet": "mkdirp dist && npx sjs --out-file ./dist/sweet-js-test.js ./src/sweet-js-test.js && node ./dist/sweet-js-test.js && rimraf dist",
+    "sweet-output": "npx sjs ./src/sweet-js-test.js"
+
   },
   "repository": {
     "type": "git",
