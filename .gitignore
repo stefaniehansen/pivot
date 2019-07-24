@@ -9,6 +9,12 @@
 !test
 !test/*
 !test/**/*
+!test-hindi
+!test-hindi/*
+!test-hindi/**/*
+!test-spanish
+!test-spanish/*
+!test-spanish/**/*
 !rules
 !rules/*
 !rules/**/*
