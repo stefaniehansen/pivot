@@ -1,5 +1,5 @@
 'lang sweet.js';
-import { fromKeyword } from '@sweet-js/helpers' for syntax
+import { fromKeyword } from '@sweet-js/helpers' for syntax;
 
 
 export syntax para = ctx => {

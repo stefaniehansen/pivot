@@ -4,6 +4,7 @@ var fs = require('fs');
 var fsProm = require('fs').promises;
 var readdirp = require('readdirp');
 var concatFiles = require('concat');
+var path = require('path');
 
 var argv = require('yargs')
     .alias('d', 'out-dir')
@@ -36,7 +37,7 @@ if (!outDir) {
 }
 
 // Find the syntax rule file for the language mapping.
-let syntaxRulesFile = `${__dirname}/rules/${programmingLanguage}-${humanLanguage}.js`;
+let syntaxRulesFile = __dirname.replace(/\\/g, "/") + '/rules/' + `${programmingLanguage}-${humanLanguage}.js`;
 // TODO: This should be dynamically constructed from the syntax rules.
 let imports = `{para, funcion, mientras, retorna, variable}`;
 let importStatement = `import ${imports} from '${syntaxRulesFile}'`;
@@ -54,10 +55,10 @@ function isJavascriptFile(fileName) {
 }
 
 // Keep track of current target directory (mirrors current working directory)
-function getTargetDir(path) {
-    let basePath = path.fullPath.split(input)[0];
-    let currentPosition = path.fullPath.split(input)[1];
-    let targetPath = `${basePath}${outDir}${currentPosition}`;
+function getTargetDir(currentPath) {
+    let basePath = currentPath.fullPath.split(input)[0];
+    let currentPosition = currentPath.fullPath.split(input)[1];
+    let targetPath = path.join(basePath, outDir, currentPosition);
     return targetPath;
 }
 
@@ -71,8 +72,12 @@ function transpileFile(entry) {
         .then(concatFiles([targetFilePath, entry.fullPath], targetFilePath))
         // Run the transpiler on each file and write over it in target directory.
         .then(exec(`npx sjs ${targetFilePath} --out-file ${targetFilePath}`, function (err, stdout, stderr) {
-            if (err) throw err;
-            else console.log(stdout);
+            if (err) {
+                console.log(err)
+            }
+            else {
+                console.log(stdout);
+            }
         }))
         .catch(err => {
             console.log(err)
