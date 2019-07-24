@@ -7,7 +7,9 @@
     "pivot": "./bin/pivot.js"
   },
   "scripts": {
-    "test": "npx pivot --hl spanish --i test",
+    "test": "npm-run-all --parallel test:* ",
+    "test:spanish": "npx pivot --hl spanish --i test/spanish",
+    "test:hindi": "npx pivot --hl hindi --i test/hindi",
     "templatize": "npx node ./src/utils/templatizer.js"
   },
   "repository": {
@@ -23,6 +25,7 @@
   "devDependencies": {
     "@sweet-js/cli": "^3.0.13",
     "@sweet-js/helpers": "^4.0.1",
+    "npm-run-all": "^4.1.5",
     "npx": "^10.2.0"
   },
   "dependencies": {
