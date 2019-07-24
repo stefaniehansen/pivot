@@ -7,7 +7,7 @@
     "pivot": "./bin/pivot.js"
   },
   "scripts": {
-    "test": "npm-run-all --parallel test:* ",
+    "test": "npm-run-all --parallel test:*:* ",
     "test:forward:spanish": "npx pivot --hl spanish --i test/forward/spanish --o dist/forward/spanish",
     "test:forward:hindi": "npx pivot --hl hindi --i test/forward/hindi --o dist/forward/hindi",
     "test:forward:chinese": "npx pivot --hl chinese --i test/forward/chinese --o dist/forward/chinese",
