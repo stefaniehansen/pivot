@@ -1,0 +1,13 @@
+export syntax ##console## = ctx => {
+  let consoleExpression = ctx.next().value;
+  let logExpression = ctx.next().value;
+  let consoleParensExpression = ctx.next().value;
+
+  if (unwrap(logExpression).value === "##log##") {
+      return #`console.log ${consoleParensExpression}`;
+  }
+  else {
+      return #`console. ${logExpression} ${consoleParensExpression}`;
+  }
+  
+};

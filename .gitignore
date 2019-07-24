@@ -9,6 +9,9 @@
 !test
 !test/*
 !test/**/*
+!test-chinese
+!test-chinese/*
+!test-chinese/**/*
 !test-hindi
 !test-hindi/*
 !test-hindi/**/*

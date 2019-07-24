@@ -4,9 +4,9 @@
 variable x = 2;
 variable y = 3;
 
-console.log("yog: " + s(x, y));
-console.log("guna karana: " + m(x, y));
-console.log("shakti: " + p(x,y));
+screen.write("yog: " + s(x, y));
+screen.write("guna karana: " + m(x, y));
+screen.write("shakti: " + p(x,y));
 
 // kaaryon
 function s(x, y){
