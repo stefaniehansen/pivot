@@ -14,7 +14,9 @@
     "execute": "npm-run-all execute:*",
     "execute:hindi": "node dist-hindi/test-hindi.js",
     "execute:spanish": "node dist-spanish/test-spanish.js",
-    "compile": "npm run test && npm run execute"
+    "compile": "npm run test && npm run execute",
+    "compile:spanish": "npm run test:spanish && npm run execute:spanish",
+    "start": "npm run compile:spanish"
   },
   "repository": {
     "type": "git",
