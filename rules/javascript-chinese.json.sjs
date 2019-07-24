@@ -1,5 +1,10 @@
 'lang sweet.js';
 import { fromKeyword, unwrap, isKeyword, fromIdentifier } from '@sweet-js/helpers' for syntax
+export syntax 警报 = ctx => {
+  let alertParensExpression = ctx.next().value;
+
+  return #`alert ${alertParensExpression}`;  
+};
 export syntax 窗口 = ctx => {
   let consoleExpression = ctx.next().value;
   let logExpression = ctx.next().value;

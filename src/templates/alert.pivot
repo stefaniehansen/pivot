@@ -1,0 +1,5 @@
+export syntax ##alert## = ctx => {
+  let alertParensExpression = ctx.next().value;
+
+  return #`alert ${alertParensExpression}`;  
+};
