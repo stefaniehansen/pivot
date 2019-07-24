@@ -4,96 +4,78 @@ var jsonFile = require('jsonfile');
 
 var mapsDir = path.join(__dirname, '/../language-maps');
 var templatesDir = path.join(__dirname, '/../src/templates');
-var rulesDir = path.join(__dirname, '/../rules')
-var mapFile = path.join(mapsDir, '/javascript-spanish.json');
+var rulesDir = path.join(__dirname, '/../rules');
 
-main();
-
-function main()
-{
+module.exports = function main(programmingLanguage, humanLanguage) {
     console.log("Using maps dir: " + mapsDir);
 
-    var mapFiles = getMapFiles(mapsDir);
+    var mapFile = getMapFile(programmingLanguage, humanLanguage);
     var templateFiles = getTemplateFiles(templatesDir);
 
-    if (!fs.existsSync(rulesDir)){
+    if (!fs.existsSync(rulesDir)) {
         fs.mkdirSync(rulesDir);
     }
 
-    mapFiles.forEach(mapFile => {
-        outputFile = path.join(rulesDir, getFileName(mapFile) + ".sjs");
-        outputContent = "";
-        templateNames = [];
-        mapDictionary = getMapDictionary(path.join(mapsDir, mapFile));
+    var outputFile = path.join(rulesDir, getFileName(mapFile) + ".sjs");
+    var outputContent = "";
 
-        templateFiles.forEach(templateFile => {
-            templateName = getTemplateName(templateFile);
-            templateContent = fs.readFileSync(path.join(templatesDir, templateFile), 'utf8');
-            console.log('Template content:\n' + templateContent);
-            resolvedContent = templateContent;
-            keys = Object.keys(mapDictionary);
+    // Import required functions from sweet-js and signal that it is a sweet.js file to sjs.
+    outputContent += `'lang sweet.js';\nimport { fromKeyword, unwrap, isKeyword, fromIdentifier } 
+    from '@sweet-js/helpers' for syntax\n`
 
-            for (var keyIndex in keys)
-            {
-                key = keys[keyIndex];
-                value = mapDictionary[key];
-                console.log('Replacing ' + key + ' -> ' + value);
-                replaceKey = '##' + key + '##';
-                resolvedContent = resolvedContent.replace(new RegExp(replaceKey, 'g'), value);
-            }
+    var templateNames = [];
+    var mapDictionary = getMapDictionary(path.join(mapsDir, mapFile));
 
-            console.log('Resolved content:\n' + resolvedContent);
+    templateFiles.forEach(templateFile => {
+        var templateName = getTemplateName(templateFile);
+        var templateContent = fs.readFileSync(path.join(templatesDir, templateFile), 'utf8');
+        console.log('Template content:\n' + templateContent);
+        var resolvedContent = templateContent;
+        keys = Object.keys(mapDictionary);
 
-            outputContent += resolvedContent + '\n';
-            templateNames.push(mapDictionary[templateName]);
-        });
+        for (var keyIndex in keys) {
+            var key = keys[keyIndex];
+            value = mapDictionary[key];
+            console.log('Replacing ' + key + ' -> ' + value);
+            var replaceKey = '##' + key + '##';
+            resolvedContent = resolvedContent.replace(new RegExp(replaceKey, 'g'), value);
+        }
 
-        outputContent += '\n#import {' + templateNames.join(',') + '} from ' + outputFile;
+        console.log('Resolved content:\n' + resolvedContent);
 
-        fs.writeFileSync(outputFile, outputContent, 'utf8');
+        outputContent += resolvedContent + '\n';
+        templateNames.push(mapDictionary[templateName]);
     });
+
+    fs.writeFileSync(outputFile, outputContent, 'utf8');
+
+    return `import {${templateNames.join(', ')}} from '${outputFile}';\n`;
 }
 
-function getMapDictionary(mapFileName)
-{
+function getMapDictionary(mapFileName) {
     var mapDictionary = jsonFile.readFileSync(mapFileName);
     return mapDictionary;
 }
 
-function getKeys(mapDictionary)
-{
-    keys = Object.keys(mapDictionary);
-    for(var i in keys){
-      console.log(keys[i] + " : " + mapDictionary[keys[i]]);
-    }
-
-    return keys;
+function getFiles(directoryPath) {
+    var files = fs.readdirSync(directoryPath);
+    return files
 }
 
-function getFiles(directoryPath)
-{
-    files = fs.readdirSync(directoryPath);
-    return files;
-}
-
-function getTemplateFiles(templatesDir)
-{
+function getTemplateFiles(templatesDir) {
     return getFiles(templatesDir);
 }
 
-function getMapFiles(mapsDir)
-{
-    return getFiles(mapsDir);
+function getMapFile(programmingLanguage, humanLanguage) {
+    return `${programmingLanguage}-${humanLanguage}.json`;
 }
 
-function getFileName(filePath)
-{
+function getFileName(filePath) {
     return path.parse(filePath).base;
 }
 
-function getTemplateName(templateFile)
-{
-    fileName = getFileName(templateFile);
-    templateName = fileName.replace(".pivot", "");
+function getTemplateName(templateFile) {
+    var fileName = getFileName(templateFile);
+    var templateName = fileName.replace(".pivot", "");
     return templateName;
 }

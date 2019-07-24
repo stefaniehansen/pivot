@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx sjs ./test/test-script.js --out-file ./sweet.js",
-    "templatize": "node ./src/templatizer.js"
+    "start": "npx node index.js --human-language spanish --programming-language javascript --input test",
+    "templatize": "npx node ./src/templatizer.js"
   },
   "repository": {
     "type": "git",
@@ -19,11 +19,14 @@
   },
   "homepage": "https://github.com/stefaniehansen/pivot#readme",
   "devDependencies": {
-    "npx": "^10.2.0",
     "@sweet-js/cli": "^3.0.13",
-    "@sweet-js/helpers": "^4.0.1"
+    "@sweet-js/helpers": "^4.0.1",
+    "npx": "^10.2.0"
   },
   "dependencies": {
-    "jsonfile": "^5.0.0"
+    "concat": "^1.0.3",
+    "jsonfile": "^5.0.0",
+    "readdirp": "^3.1.1",
+    "yargs": "^13.3.0"
   }
 }

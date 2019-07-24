@@ -1,2 +1,17 @@
-node_modules
-.idea
+# Ignore everything:
+*
+
+# Except for the themes directories:
+
+!src
+!src/*
+!src/**/*
+!test
+!test/*
+!test/**/*
+!rules
+!rules/*
+!rules/**/*
+!language-maps
+!language-maps/*
+!language-maps/**/*
