@@ -8,12 +8,13 @@
   },
   "scripts": {
     "test": "npm-run-all --parallel test:* ",
-    "test:spanish": "npx pivot --hl spanish --i test-spanish --o dist-spanish",
-    "test:hindi": "npx pivot --hl hindi --i test-hindi --o dist-hindi",
+    "test:forward:spanish": "npx pivot --hl spanish --i test/forward/spanish --o dist/forward/spanish",
+    "test:forward:hindi": "npx pivot --hl hindi --i test/forward/hindi --o dist/forward/hindi",
+    "test:forward:chinese": "npx pivot --hl chinese --i test/forward/chinese --o dist/forward/chinese",
     "templatize": "npx node ./src/utils/templatizer.js",
     "execute": "npm-run-all execute:*",
-    "execute:hindi": "node dist-hindi/test-hindi.js",
-    "execute:spanish": "node dist-spanish/test-spanish.js",
+    "execute:hindi": "node dist/forward/hindi/test-hindi.js",
+    "execute:spanish": "node dist/forward/spanish/test-spanish.js",
     "compile": "npm run test && npm run execute",
     "compile:spanish": "npm run test:spanish && npm run execute:spanish",
     "start": "npm run compile:spanish"
