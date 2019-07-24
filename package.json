@@ -1,5 +1,5 @@
 {
-  "name": "pivot",
+  "name": "pivot-js",
   "version": "1.0.0",
   "description": "Enable anyone in the world to learn how to program by removing the language barrier inherent to English based programming languages",
   "main": "index.js",
@@ -21,6 +21,11 @@
   "bugs": {
     "url": "https://github.com/stefaniehansen/pivot/issues"
   },
+  "files": [
+    "rules",
+    "src",
+    "bin"
+  ],
   "homepage": "https://github.com/stefaniehansen/pivot#readme",
   "devDependencies": {
     "@sweet-js/cli": "^3.0.13",
