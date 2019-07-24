@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "Enable anyone in the world to learn how to program by removing the language barrier inherent to English based programming languages",
   "main": "index.js",
+  "bin": {
+    "pivot": "./bin/pivot.js"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx node index.js --human-language spanish --programming-language javascript --input test",
+    "test": "npm-run-all --parallel test:* ",
+    "test:spanish": "npx pivot --hl spanish --i test-spanish --o dist-spanish",
+    "test:hindi": "npx pivot --hl hindi --i test-hindi --o dist-hindi",
     "templatize": "npx node ./src/utils/templatizer.js"
   },
   "repository": {
@@ -21,6 +25,7 @@
   "devDependencies": {
     "@sweet-js/cli": "^3.0.13",
     "@sweet-js/helpers": "^4.0.1",
+    "npm-run-all": "^4.1.5",
     "npx": "^10.2.0"
   },
   "dependencies": {

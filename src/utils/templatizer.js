@@ -8,6 +8,10 @@ var fileUtils = require('./file-utils')
 
 main();
 
+function getImportStatement() {
+    return `'lang sweet.js';\nimport { fromKeyword, unwrap, isKeyword, fromIdentifier } from '@sweet-js/helpers' for syntax\n`;
+}
+
 function main() {
     console.log("Using maps dir: " + mapsDir);
 
@@ -21,7 +25,7 @@ function main() {
         var outputContent = "";
 
         // Import required functions from sweet-js and signal that it is a sweet.js file to sjs.
-        outputContent += `'lang sweet.js';\nimport { fromKeyword, unwrap, isKeyword, fromIdentifier } from '@sweet-js/helpers' for syntax\n`
+        outputContent += getImportStatement();
 
         templateFiles.forEach(templateFile => {
             var templateContent = fs.readFileSync(path.join(templatesDir, templateFile), 'utf8');

@@ -9,9 +9,17 @@
 !test
 !test/*
 !test/**/*
+!test-hindi
+!test-hindi/*
+!test-hindi/**/*
+!test-spanish
+!test-spanish/*
+!test-spanish/**/*
 !rules
 !rules/*
 !rules/**/*
 !language-maps
 !language-maps/*
 !language-maps/**/*
+!bin
+!bin/*
