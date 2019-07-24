@@ -18,6 +18,6 @@ module.exports = function(programmingLanguage, humanLanguage) {
         templateNames.push(mapDictionary[templateName]);
     })
 
-    var outputFile = path.join(rulesDir, fileUtils.getFileName(mapFile) + ".sjs");
+    var outputFile = path.join(rulesDir, fileUtils.getFileName(mapFile) + ".sjs").replace(/\\/g, "/");
     return `import {${templateNames.join(', ')}} from '${outputFile}';\n`;
 }
