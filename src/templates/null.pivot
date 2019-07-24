@@ -1,0 +1,3 @@
+export syntax ##null## = ctx => {
+    return #`null`;
+};

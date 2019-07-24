@@ -1,11 +1,11 @@
 'lang sweet.js';
 import { fromKeyword, unwrap, isKeyword, fromIdentifier } from '@sweet-js/helpers' for syntax
-export syntax consola = ctx => {
+export syntax 窗口 = ctx => {
   let consoleExpression = ctx.next().value;
   let logExpression = ctx.next().value;
   let consoleParensExpression = ctx.next().value;
 
-  if (unwrap(logExpression).value === "logear") {
+  if (unwrap(logExpression).value === "记录") {
       return #`console.log ${consoleParensExpression}`;
   }
   else {
@@ -13,15 +13,15 @@ export syntax consola = ctx => {
   }
   
 };
-export syntax falso = ctx => {
+export syntax 假 = ctx => {
     return #`false`;
 };
-export syntax para = ctx => {
+export syntax 对于 = ctx => {
   let forExpression = ctx.contextify(ctx.next().value);
   let parensContent = #``;
   for (let forItem of forExpression) {
       let unwrappedItem = unwrap(forItem);
-      if(unwrappedItem.value === "variable"){
+      if(unwrappedItem.value === "变量"){
           parensContent = parensContent.concat(#`var`);
       }
       else 
@@ -35,11 +35,11 @@ export syntax para = ctx => {
   
   return result;
 };
-export syntax funcion = ctx => {
+export syntax 功能 = ctx => {
     return #`function`;
 };
 
-export syntax si = (ctx) => {
+export syntax 如果 = (ctx) => {
     let ifExpression = ctx.next().value;
     let ifContent = ctx.next().value;
     let result = #`if ${ifExpression} ${ifContent}`;
@@ -47,8 +47,8 @@ export syntax si = (ctx) => {
     // Extract the else in case we are about to see an else if.
     let elseKeyword = ctx.next().value;
     let isItElseIf = ctx.next().value;
-    while (unwrap(elseKeyword).value === 'sino' && 
-           unwrap(isItElseIf).value === 'si') {
+    while (unwrap(elseKeyword).value === '其他' && 
+           unwrap(isItElseIf).value === '如果') {
         let elseIfExpression = ctx.next().value;
         let elseIfContent = ctx.next().value;
         elseKeyword = ctx.next().value;
@@ -56,7 +56,7 @@ export syntax si = (ctx) => {
         result = result.concat(#`else if ${elseIfExpression} ${elseIfContent}`)
     }
     
-    if (unwrap(elseKeyword).value === 'sino') {
+    if (unwrap(elseKeyword).value === '其他') {
         // At this point the isItElseIf contains the else content
         let elseContent = isItElseIf;
         result = result.concat(#`else ${elseContent}`)
@@ -65,31 +65,31 @@ export syntax si = (ctx) => {
     return result
 };
 
-export syntax deja = ctx => {
+export syntax 让 = ctx => {
     return #`let`;
 };
-export syntax nulo = ctx => {
+export syntax 空值 = ctx => {
     return #`null`;
 };
-export syntax retorna = ctx => {
+export syntax 返回 = ctx => {
     let ident = ctx.next().value;
     return #`return ${ident}`;
 };
-export syntax arrojar = ctx => {
+export syntax 扔 = ctx => {
     let ident = ctx.next().value;
     return #`throw ${ident}`;
 };
-export syntax cierto = ctx => {
+export syntax 真正 = ctx => {
     return #`true`;
 };
 // Try catch finally
-export syntax intenta = ctx => {
+export syntax 尝试 = ctx => {
     // Try
     let tryContent = ctx.next().value;
 
     // Catch
     let catchKeyword = ctx.next().value;
-    if (unwrap(catchKeyword).value !== 'captura') {
+    if (unwrap(catchKeyword).value !== '抓住') {
         throw new Error('Try is missing catch');
     }
     let catchExpression = ctx.next().value;
@@ -100,7 +100,7 @@ export syntax intenta = ctx => {
     // Finally (optional)
     let finallyKeyword = ctx.next().value;
     if (finallyKeyword) {
-        if (unwrap(finallyKeyword).value !== 'finalmente') {
+        if (unwrap(finallyKeyword).value !== '最后') {
             throw new Error('Final part of try has to be finally');
         }
         let finallyContent = ctx.next().value;
@@ -109,9 +109,9 @@ export syntax intenta = ctx => {
 
     return result
 };
-export syntax variable = ctx => {
+export syntax 变量 = ctx => {
     return #`var`;
 };
-export syntax mientras = ctx => {
+export syntax 而 = ctx => {
     return #`while`;
 };

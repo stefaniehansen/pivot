@@ -1,5 +1,21 @@
 'lang sweet.js';
 import { fromKeyword, unwrap, isKeyword, fromIdentifier } from '@sweet-js/helpers' for syntax
+export syntax screen = ctx => {
+  let consoleExpression = ctx.next().value;
+  let logExpression = ctx.next().value;
+  let consoleParensExpression = ctx.next().value;
+
+  if (unwrap(logExpression).value === "write") {
+      return #`console.log ${consoleParensExpression}`;
+  }
+  else {
+      return #`console. ${logExpression} ${consoleParensExpression}`;
+  }
+  
+};
+export syntax galat = ctx => {
+    return #`false`;
+};
 export syntax keliye = ctx => {
   let forExpression = ctx.contextify(ctx.next().value);
   let parensContent = #``;
@@ -49,6 +65,12 @@ export syntax agar = (ctx) => {
     return result
 };
 
+export syntax mano = ctx => {
+    return #`let`;
+};
+export syntax kuchnahin = ctx => {
+    return #`null`;
+};
 export syntax vapas = ctx => {
     let ident = ctx.next().value;
     return #`return ${ident}`;
