@@ -64,11 +64,11 @@ module.exports = function (outDir, input, humanLanguage, programmingLanguage) {
         fileUtils.makeDirIfNotExists(outDir);
         // Read input directory recursively
         for await (const entry of readdirp(input, {fileFilter: '*.js', type: 'files_directories'})) {
-            let targetFilePath = getTargetFilePath(entry);
             if (isJavascriptFile(entry)) {
                 transpileFile(entry);
             } else {
                 // We are looking at a directory
+                let targetFilePath = getTargetFilePath(entry);
                 fileUtils.makeDirIfNotExists(targetFilePath);
             }
         }
