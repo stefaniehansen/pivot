@@ -16,7 +16,7 @@
     "execute:hindi": "node dist/forward/hindi/test-hindi.js",
     "execute:spanish": "node dist/forward/spanish/test-spanish.js",
     "compile": "npm run test && npm run execute",
-    "compile:spanish": "npm run test:spanish && npm run execute:spanish",
+    "compile:spanish": "npm run test:forward:spanish && npm run execute:spanish",
     "start": "npm run compile:spanish"
   },
   "repository": {
