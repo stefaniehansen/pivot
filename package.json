@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx sjs ./test/test-script.js --out-file ./sweet.js"
+    "start": "npx node index.js --human-language spanish --programming-language javascript --input test",
+    "templatize": "npx node ./src/utils/templatizer.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,11 @@
     "@sweet-js/cli": "^3.0.13",
     "@sweet-js/helpers": "^4.0.1",
     "npx": "^10.2.0"
+  },
+  "dependencies": {
+    "concat": "^1.0.3",
+    "jsonfile": "^5.0.0",
+    "readdirp": "^3.1.1",
+    "yargs": "^13.3.0"
   }
 }

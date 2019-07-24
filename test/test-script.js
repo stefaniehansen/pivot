@@ -9,6 +9,10 @@ variable miFuncion = funcion(num) {
     retorna num + 1;
 }
 
+variable myFuncion = funcion(num) {
+    retorna num + 1;
+}
+
 funcion fibonacci(num){
     variable a = 1, b = 0, temp;
 

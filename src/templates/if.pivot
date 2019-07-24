@@ -1,6 +1,4 @@
-// If elseif else
-export syntax ##if## = ctx => {
-    // If
+export syntax ##if## = (ctx) => {
     let ifExpression = ctx.next().value;
     let ifContent = ctx.next().value;
     let result = #`if ${ifExpression} ${ifContent}`;
