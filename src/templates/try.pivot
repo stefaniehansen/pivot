@@ -1,26 +1,26 @@
 // Try catch finally
-export syntax ##try## = ctx => {
+export syntax ##FROM_try## = ctx => {
     // Try
     let tryContent = ctx.next().value;
 
     // Catch
     let catchKeyword = ctx.next().value;
-    if (unwrap(catchKeyword).value !== '##catch##') {
+    if (unwrap(catchKeyword).value !== '##FROM_catch##') {
         throw new Error('Try is missing catch');
     }
     let catchExpression = ctx.next().value;
     let catchContent = ctx.next().value;
 
-    let result = #`try ${tryContent} catch ${catchExpression} ${catchContent}`
+    let result = #`##TO_try## ${tryContent} ##TO_catch## ${catchExpression} ${catchContent}`
 
     // Finally (optional)
     let finallyKeyword = ctx.next().value;
     if (finallyKeyword) {
-        if (unwrap(finallyKeyword).value !== '##finally##') {
+        if (unwrap(finallyKeyword).value !== '##FROM_finally##') {
             throw new Error('Final part of try has to be finally');
         }
         let finallyContent = ctx.next().value;
-        result = result.concat(#`finally ${finallyContent}`)
+        result = result.concat(#`##TO_finally## ${finallyContent}`)
     }
 
     return result

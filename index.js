@@ -16,7 +16,7 @@ var fileUtils = require('./src/utils/file-utils');
 // Add import at top.
 // Run the target file through Sweet.js and produce transpiled files (overwrite intermediate file).
 
-module.exports = function (outDir, input, humanLanguage, programmingLanguage) {
+module.exports = function (outDir, input, humanLanguage, programmingLanguage, forward) {
 // If the user doesn't specify an output directory, use dist-pivot by default
     if (!outDir) {
         outDir = 'dist-pivot';
@@ -27,7 +27,7 @@ module.exports = function (outDir, input, humanLanguage, programmingLanguage) {
     }
 
 // Generate import statement for rules.
-    let importStatement = generateImports(programmingLanguage, humanLanguage);
+    let importStatement = generateImports(programmingLanguage, humanLanguage, forward);
 
 // Keep track of current target directory (mirrors current working directory)
     function getTargetDir(currentPath) {

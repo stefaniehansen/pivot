@@ -1,4 +1,4 @@
-export syntax ##throw## = ctx => {
+export syntax ##FROM_throw## = ctx => {
     let ident = ctx.next().value;
-    return #`throw ${ident}`;
+    return #`##TO_throw## ${ident}`;
 };

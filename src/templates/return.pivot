@@ -1,4 +1,4 @@
-export syntax ##return## = ctx => {
+export syntax ##FROM_return## = ctx => {
     let ident = ctx.next().value;
-    return #`return ${ident}`;
+    return #`##TO_return## ${ident}`;
 };
