@@ -1,0 +1,4 @@
+export syntax ##throw## = ctx => {
+    let ident = ctx.next().value;
+    return #`throw ${ident}`;
+};

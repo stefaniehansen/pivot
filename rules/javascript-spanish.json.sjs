@@ -27,7 +27,7 @@ export syntax si = (ctx) => {
     let ifExpression = ctx.next().value;
     let ifContent = ctx.next().value;
     let result = #`if ${ifExpression} ${ifContent}`;
-
+    
     // Extract the else in case we are about to see an else if.
     let elseKeyword = ctx.next().value;
     let isItElseIf = ctx.next().value;
@@ -52,6 +52,13 @@ export syntax si = (ctx) => {
 export syntax retorna = ctx => {
     let ident = ctx.next().value;
     return #`return ${ident}`;
+};
+export syntax arrojar = ctx => {
+    let ident = ctx.next().value;
+    return #`throw ${ident}`;
+};
+export syntax cierto = ctx => {
+    return #`true`;
 };
 // Try catch finally
 export syntax intenta = ctx => {
