@@ -5,7 +5,7 @@ var fsProm = require('fs').promises;
 var readdirp = require('readdirp');
 var concatFiles = require('concat');
 var path = require('path');
-var generateExports = require('./src/utils/generate-exports')
+var generateImports = require('./src/utils/generate-imports')
 
 var argv = require('yargs')
     .alias('d', 'out-dir')
@@ -38,7 +38,7 @@ if (!outDir) {
 }
 
 // Generate import statement for rules.
-let importStatement = generateExports(programmingLanguage, humanLanguage);
+let importStatement = generateImports(programmingLanguage, humanLanguage);
 
 function makeDirIfNotExists(dir) {
     if (!fs.existsSync(dir)) {
