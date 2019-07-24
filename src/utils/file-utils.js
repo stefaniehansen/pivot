@@ -2,6 +2,16 @@ var path = require('path');
 var fs = require('fs');
 var jsonFile = require('jsonfile');
 
+function makeDirIfNotExists(dir) {
+    if (!fs.existsSync(dir)) {
+        try {
+            fs.mkdirSync(dir);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
 function getMapFile(programmingLanguage, humanLanguage) {
     return `${programmingLanguage}-${humanLanguage}.json`;
 }
@@ -35,5 +45,6 @@ module.exports = exports = {
     getMapFile,
     getTemplateName,
     getTemplateFiles,
-    getMapDictionary
+    getMapDictionary,
+    makeDirIfNotExists
 }

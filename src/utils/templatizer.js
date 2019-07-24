@@ -13,10 +13,7 @@ function main() {
 
     var mapFiles = getMapFiles(mapsDir);
     var templateFiles = fileUtils.getTemplateFiles(templatesDir);
-
-    if (!fs.existsSync(rulesDir)){
-        fs.mkdirSync(rulesDir);
-    }
+    fileUtils.makeDirIfNotExists(rulesDir);
 
     mapFiles.forEach(mapFile => {
         var outputFile = path.join(rulesDir, fileUtils.getFileName(mapFile) + ".sjs");

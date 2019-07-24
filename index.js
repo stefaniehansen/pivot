@@ -6,6 +6,7 @@ var readdirp = require('readdirp');
 var concatFiles = require('concat');
 var path = require('path');
 var generateImports = require('./src/utils/generate-imports')
+var fileUtils = require('./src/utils/file-utils');
 
 var argv = require('yargs')
     .alias('d', 'out-dir')
@@ -40,16 +41,6 @@ if (!outDir) {
 // Generate import statement for rules.
 let importStatement = generateImports(programmingLanguage, humanLanguage);
 
-function makeDirIfNotExists(dir) {
-    if (!fs.existsSync(dir)) {
-        try {
-            fs.mkdirSync(dir);
-        } catch (error) {
-            console.log(error)
-        }
-    }
-}
-
 function isJavascriptFile(fileName) {
     let fileNameArray = fileName.split('.');
     let ext = fileNameArray[fileNameArray.length - 1];
@@ -67,7 +58,7 @@ function getTargetDir(currentPath) {
 function transpileFile(entry) {
     let targetDir = getTargetDir(entry);
     let targetFilePath = `${targetDir}${entry.basename}`;
-    makeDirIfNotExists(targetDir);
+    fileUtils.makeDirIfNotExists(targetDir);
     // Write syntax rule imports into target dir files
     fsProm.writeFile(targetFilePath, importStatement, 'utf8')
     // Concatenate target dir files containing import statements with base file content
@@ -88,7 +79,7 @@ function transpileFile(entry) {
 // Recursive directory scan
 async function read() {
     // Create initial output directory (using command line input)
-    makeDirIfNotExists(outDir);
+    fileUtils.makeDirIfNotExists(outDir);
     // Read input directory recursively
     for await (const entry of readdirp(input)) {
         if (isJavascriptFile(entry.basename)) {
