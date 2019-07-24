@@ -20,8 +20,7 @@ module.exports = function main(programmingLanguage, humanLanguage) {
     var outputContent = "";
 
     // Import required functions from sweet-js and signal that it is a sweet.js file to sjs.
-    outputContent += `'lang sweet.js';\nimport { fromKeyword, unwrap, isKeyword, fromIdentifier } 
-    from '@sweet-js/helpers' for syntax\n`
+    outputContent += `'lang sweet.js';\nimport { fromKeyword, unwrap, isKeyword, fromIdentifier } from '@sweet-js/helpers' for syntax\n`
 
     var templateNames = [];
     var mapDictionary = getMapDictionary(path.join(mapsDir, mapFile));
