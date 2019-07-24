@@ -22,9 +22,7 @@ syntax para = ctx => {
 
 //The `syntax` keyword is used to create and name new macros.
 syntax variable = ctx => {
-    let id = ctx.next().value;
-    //console.log(id);
-    return #`var ${id}`;
+    return #`var`;
 };
 
 // CODE TO PARSE STARTS HERE

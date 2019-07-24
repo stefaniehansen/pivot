@@ -1,5 +1,5 @@
 // Try catch finally
-syntax ##try## = ctx => {
+export syntax ##try## = ctx => {
     // Try
     let tryContent = ctx.next().value;
 

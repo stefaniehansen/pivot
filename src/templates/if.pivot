@@ -1,5 +1,5 @@
 // If elseif else
-syntax ##if## = ctx => {
+export syntax ##if## = ctx => {
     // If
     let ifExpression = ctx.next().value;
     let ifContent = ctx.next().value;
