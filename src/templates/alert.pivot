@@ -1,5 +1,5 @@
 export syntax ##alert## = ctx => {
+  console.log("Starting Alert Syntax");
   let alertParensExpression = ctx.next().value;
-
   return #`alert ${alertParensExpression}`;  
 };

@@ -1,8 +1,8 @@
 'lang sweet.js';
 import { fromKeyword, unwrap, isKeyword, fromIdentifier } from '@sweet-js/helpers' for syntax
 export syntax 警报 = ctx => {
+  console.log("Starting Alert Syntax");
   let alertParensExpression = ctx.next().value;
-
   return #`alert ${alertParensExpression}`;  
 };
 export syntax 窗口 = ctx => {
@@ -18,6 +18,20 @@ export syntax 窗口 = ctx => {
   }
   
 };
+syntax 做 = ctx => {
+    // Do
+    let doContent = ctx.next().value;
+
+    // While
+    let whileKeyword = ctx.next().value;
+    if (unwrap(whileKeyword).value !== '而') {
+        throw new Error('Do is missing while');
+    }
+    let whileExpression = ctx.next().value;
+    let result = #`do ${doContent} while ${whileExpression}`
+
+    return result
+}
 export syntax 假 = ctx => {
     return #`false`;
 };
@@ -50,12 +64,14 @@ export syntax 如果 = (ctx) => {
     let result = #`if ${ifExpression} ${ifContent}`;
     
     // Extract the else in case we are about to see an else if.
+    let mark = ctx.mark();
     let elseKeyword = ctx.next().value;
     let isItElseIf = ctx.next().value;
     while (unwrap(elseKeyword).value === '其他' && 
            unwrap(isItElseIf).value === '如果') {
         let elseIfExpression = ctx.next().value;
         let elseIfContent = ctx.next().value;
+        mark = ctx.mark();
         elseKeyword = ctx.next().value;
         isItElseIf = ctx.next().value;
         result = result.concat(#`else if ${elseIfExpression} ${elseIfContent}`)
@@ -65,6 +81,9 @@ export syntax 如果 = (ctx) => {
         // At this point the isItElseIf contains the else content
         let elseContent = isItElseIf;
         result = result.concat(#`else ${elseContent}`)
+    } else {
+        // If we don't find else, reset to before so we don't eat extra tokens
+        ctx.reset(mark)
     }
     
     return result
@@ -80,6 +99,32 @@ export syntax 返回 = ctx => {
     let ident = ctx.next().value;
     return #`return ${ident}`;
 };
+export syntax 开关 = ctx => {
+    let switchExpression = ctx.next().value;
+    let result = #`switch ${switchExpression}`;
+    // `Expand the switch content and iterate on it
+    let switchResult = #``
+    let switchContent = ctx.contextify(ctx.next().value);
+    for (let switchItem of switchContent) {
+        switch (unwrap(switchItem).value) {
+            case '案件':
+                let caseExpression = switchContent.next().value;
+                switchResult = switchResult.concat(#`case ${caseExpression}`);
+                break;
+            case '默认':
+                let defaultExpression = switchContent.next().value;
+                switchResult = switchResult.concat(#`default ${defaultExpression}`);
+                break;
+            case '布尔':
+                switchResult = switchResult.concat(#`break`);
+                break;
+            default:
+                switchResult = switchResult.concat(#`${switchItem}`)
+        }
+    }
+
+    return #`${result} {${switchResult}}`;
+}
 export syntax 扔 = ctx => {
     let ident = ctx.next().value;
     return #`throw ${ident}`;
