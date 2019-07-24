@@ -1,6 +1,6 @@
 'lang sweet.js';
 import { fromKeyword, unwrap, isKeyword, fromIdentifier } from '@sweet-js/helpers' for syntax
-export syntax alert = ctx => {
+export syntax savdhan = ctx => {
   let alertParensExpression = ctx.next().value;
 
   return #`alert ${alertParensExpression}`;  
