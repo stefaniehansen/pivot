@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 var argv = require('yargs')
-    .alias('d', 'out-dir')
+    .alias('o', 'out-dir')
     .alias('i', 'input')
     .alias('hl', 'human-language')
     .alias('pl', 'programming-language')
-    .describe('d', '(optional) output directory')
+    .describe('o', '(optional) output directory')
     .describe('i', 'input directory (root) to be transpiled')
     .describe('hl', 'human language source code is written in')
     .describe('pl', '(optional) programming language to output')

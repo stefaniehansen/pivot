@@ -8,8 +8,8 @@
   },
   "scripts": {
     "test": "npm-run-all --parallel test:* ",
-    "test:spanish": "npx pivot --hl spanish --i test/spanish",
-    "test:hindi": "npx pivot --hl hindi --i test/hindi",
+    "test:spanish": "npx pivot --hl spanish --i test-spanish --o dist-spanish",
+    "test:hindi": "npx pivot --hl hindi --i test-hindi --o dist-hindi",
     "templatize": "npx node ./src/utils/templatizer.js"
   },
   "repository": {

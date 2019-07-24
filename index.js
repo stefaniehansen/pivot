@@ -6,6 +6,7 @@ var path = require('path');
 var generateImports = require('./src/utils/generate-imports');
 var fileUtils = require('./src/utils/file-utils');
 
+//TODO: Work out bugs in file traversal.
 
 // Get target Directory and create if not exists.
 // Read files one by one.
