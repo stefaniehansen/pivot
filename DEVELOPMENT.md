@@ -1,7 +1,7 @@
  ### General Development
  We use yarn as a package manager. Install yarn globally using `npm i -g yarn` and then run the one-time setup script 
  `yarn link` to enable you to run pivot as a global command line utility. To run our test scripts through the transpiler, 
- use `yarn run test`.
+ use `yarn run test`. You will need node v10 or above to run the utility.
 
 ### Creating a Language Map
 Create a language map with a name formatted like `<programming language>-<human language>.json` in `./language-maps`. 
