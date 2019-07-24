@@ -5,6 +5,8 @@ var fsProm = require('fs').promises;
 var readdirp = require('readdirp');
 var concatFiles = require('concat');
 var path = require('path');
+var generateImports = require('./src/utils/generate-imports')
+var fileUtils = require('./src/utils/file-utils');
 
 var argv = require('yargs')
     .alias('d', 'out-dir')
@@ -25,7 +27,7 @@ var argv = require('yargs')
 // Construct target directory path using current directory.
 // Create directories as we traverse if they don't exist.
 // Copy current file to target directory.
-// Read file from target directory and add import at top.
+// Add import at top.
 // Run the target file through Sweet.js and produce transpiled files (overwrite intermediate file).
 
 // Command line arguments provided by user
@@ -36,17 +38,8 @@ if (!outDir) {
     outDir = 'dist-pivot';
 }
 
-// Find the syntax rule file for the language mapping.
-let syntaxRulesFile = __dirname.replace(/\\/g, "/") + '/rules/' + `${programmingLanguage}-${humanLanguage}.js`;
-// TODO: This should be dynamically constructed from the syntax rules.
-let imports = `{para, funcion, mientras, retorna, variable}`;
-let importStatement = `import ${imports} from '${syntaxRulesFile}'`;
-
-function makeDirIfNotExists(dir) {
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir);
-    }
-}
+// Generate import statement for rules.
+let importStatement = generateImports(programmingLanguage, humanLanguage);
 
 function isJavascriptFile(fileName) {
     let fileNameArray = fileName.split('.');
@@ -65,7 +58,7 @@ function getTargetDir(currentPath) {
 function transpileFile(entry) {
     let targetDir = getTargetDir(entry);
     let targetFilePath = `${targetDir}${entry.basename}`;
-    makeDirIfNotExists(targetDir);
+    fileUtils.makeDirIfNotExists(targetDir);
     // Write syntax rule imports into target dir files
     fsProm.writeFile(targetFilePath, importStatement, 'utf8')
     // Concatenate target dir files containing import statements with base file content
@@ -74,8 +67,7 @@ function transpileFile(entry) {
         .then(exec(`npx sjs ${targetFilePath} --out-file ${targetFilePath}`, function (err, stdout, stderr) {
             if (err) {
                 console.log(err)
-            }
-            else {
+            } else {
                 console.log(stdout);
             }
         }))
@@ -87,7 +79,7 @@ function transpileFile(entry) {
 // Recursive directory scan
 async function read() {
     // Create initial output directory (using command line input)
-    makeDirIfNotExists(outDir);
+    fileUtils.makeDirIfNotExists(outDir);
     // Read input directory recursively
     for await (const entry of readdirp(input)) {
         if (isJavascriptFile(entry.basename)) {
