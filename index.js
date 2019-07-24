@@ -5,7 +5,7 @@ var fsProm = require('fs').promises;
 var readdirp = require('readdirp');
 var concatFiles = require('concat');
 var path = require('path');
-var templatizer = require('./src/templatizer')
+var generateExports = require('./src/utils/generate-exports')
 
 var argv = require('yargs')
     .alias('d', 'out-dir')
@@ -37,8 +37,8 @@ if (!outDir) {
     outDir = 'dist-pivot';
 }
 
-// Create rules file and generate import statement for rules.
-let importStatement = templatizer(programmingLanguage, humanLanguage);
+// Generate import statement for rules.
+let importStatement = generateExports(programmingLanguage, humanLanguage);
 
 function makeDirIfNotExists(dir) {
     if (!fs.existsSync(dir)) {

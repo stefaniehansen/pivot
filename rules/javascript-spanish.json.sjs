@@ -1,6 +1,5 @@
 'lang sweet.js';
-import { fromKeyword, unwrap, isKeyword, fromIdentifier } 
-    from '@sweet-js/helpers' for syntax
+import { fromKeyword, unwrap, isKeyword, fromIdentifier } from '@sweet-js/helpers' for syntax
 export syntax funcion = ctx => {
   return #`function`;
 };
