@@ -1,3 +1,5 @@
+import { getEnabledCategories } from "trace_events";
+
 // Esta es una libreria de matematicas
 // Aprendiendo JavaScript
 
@@ -34,4 +36,20 @@ funcion potencia(x,y){
         resultado = resultado * y;
     }
     retorna resultado;
+}
+
+funcion elige (numero){
+    eleccion(numero){
+        caso 1:
+            console.log("chose 1"); 
+        parar;
+        caso 2:
+            console.log("chose 2"); 
+        parar;
+        caso 3:
+            console.log("chose 3"); 
+        parar;
+        predeterminado :
+            console.log("desconocido");
+    }
 }
