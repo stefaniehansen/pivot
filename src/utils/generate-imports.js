@@ -1,7 +1,7 @@
 var path = require('path');
-var mapsDir = path.join(__dirname, '../../language-maps');
-var rulesDir = path.join(__dirname, '../../rules');
-var templatesDir = path.join(__dirname, '../templates');
+var mapsDir = path.join(__dirname, '/../../language-maps');
+var rulesDir = path.join(__dirname, '/../../rules');
+var templatesDir = path.join(__dirname, '/../templates');
 var fileUtils = require('./file-utils');
 
 

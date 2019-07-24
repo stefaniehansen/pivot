@@ -1,9 +1,9 @@
 var path = require('path');
 var fs = require('fs');
 
-var mapsDir = path.join(__dirname, '/../language-maps');
-var templatesDir = path.join(__dirname, '/../src/templates');
-var rulesDir = path.join(__dirname, '/../rules');
+var mapsDir = path.join(__dirname, '/../../language-maps');
+var templatesDir = path.join(__dirname, '/../templates');
+var rulesDir = path.join(__dirname, '/../../rules');
 var fileUtils = require('./file-utils')
 
 main();
@@ -11,7 +11,7 @@ main();
 function main() {
     console.log("Using maps dir: " + mapsDir);
 
-    var mapFiles = getMapFiles(mapsDir);
+    var mapFiles = fileUtils.getMapFiles(mapsDir);
     var templateFiles = fileUtils.getTemplateFiles(templatesDir);
     fileUtils.makeDirIfNotExists(rulesDir);
 

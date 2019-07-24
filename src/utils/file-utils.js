@@ -26,6 +26,11 @@ function getFileName(filePath) {
     return path.parse(filePath).base;
 }
 
+function getMapFiles(mapsDir)
+{
+    return getFiles(mapsDir);
+}
+
 function getTemplateFiles(templatesDir) {
     return getFiles(templatesDir);
 }
@@ -43,6 +48,7 @@ function getFiles(directoryPath) {
 module.exports = exports = {
     getFileName,
     getMapFile,
+    getMapFiles,
     getTemplateName,
     getTemplateFiles,
     getMapDictionary,

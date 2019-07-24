@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx node index.js --human-language spanish --programming-language javascript --input test",
-    "templatize": "npx node ./src/templatizer.js"
+    "templatize": "npx node ./src/utils/templatizer.js"
   },
   "repository": {
     "type": "git",
