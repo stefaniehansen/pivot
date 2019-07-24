@@ -1,0 +1,19 @@
+export syntax ##switch## = ctx => {
+    let result = #``;
+    let switchExpression = ctx.next().value;
+    result = result.concat(#`##switch## ${switchExpression} {}`);
+
+    // `Expand the switch content and iterate on it
+    let switchContent = ctx.contextify(ctx.next().value);
+    for (let switchItem of switchContent) {
+        if(unwrap(switchItem).value === ##case##{
+            
+        }
+        else if(unwrap(switchItem).value === ##default##){
+
+        }
+        else{
+
+        }
+    }
+}
