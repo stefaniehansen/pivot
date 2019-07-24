@@ -37,7 +37,7 @@ if (!outDir) {
 }
 
 // Find the syntax rule file for the language mapping.
-let syntaxRulesFile = path.join(__dirname, './rules/', `${programmingLanguage}-${humanLanguage}.js`);
+let syntaxRulesFile = __dirname.replace(/\\/g, "/") + '/rules/' + `${programmingLanguage}-${humanLanguage}.js`;
 // TODO: This should be dynamically constructed from the syntax rules.
 let imports = `{para, funcion, mientras, retorna, variable}`;
 let importStatement = `import ${imports} from '${syntaxRulesFile}'`;
