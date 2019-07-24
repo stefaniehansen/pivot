@@ -15,3 +15,5 @@
 !language-maps
 !language-maps/*
 !language-maps/**/*
+!bin
+!bin/*

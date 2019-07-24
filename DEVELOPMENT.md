@@ -1,8 +1,12 @@
-Currently, we only support Javascript transpilation.
+ ### General Development
+ We use yarn as a package manager. Install yarn globally using `npm i -g yarn` and then run the one-time setup script 
+ `yarn link` to enable you to run pivot as a global command line utility. To run our test scripts through the transpiler, 
+ use `yarn run test`.
 
 ### Creating a Language Map
 Create a language map with a name formatted like `<programming language>-<human language>.json` in `./language-maps`. 
 You may use `javascript-spanish.json` as a guide. The keys are javascript keywords and the values are translated keywords.
+Currently, we only support Javascript transpilation.
 
 ### Contributing a Keyword Syntax Rule
 We use [sweet.js](https://www.sweetjs.org/) to parse and transpile code. Take a look at their documentation to get a sense 
@@ -23,3 +27,8 @@ When you have added a language map or a keyword syntax rule, you will need to ge
 done for you by `./src/utils/templatizer.js`. Simply run `yarn run templatize` and you will see a new/overwritten rule set in `./rules`.
 Please commit the new rule set and/or language map so that others can take advantage of it! 
 
+### Testing the utility
+Run `npm link` and then you'll be able to run the utility in your terminal.  Here's an example command: 
+```
+pivot --hl spanish --i test
+```

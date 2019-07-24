@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "Enable anyone in the world to learn how to program by removing the language barrier inherent to English based programming languages",
   "main": "index.js",
+  "bin": {
+    "pivot": "./bin/pivot.js"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx node index.js --human-language spanish --programming-language javascript --input test",
+    "test": "npx pivot --hl spanish --i test",
     "templatize": "npx node ./src/utils/templatizer.js"
   },
   "repository": {
