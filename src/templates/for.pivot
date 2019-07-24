@@ -1,4 +1,4 @@
-syntax ##for## = ctx => {
+export syntax ##for## = ctx => {
   let forExpression = ctx.contextify(ctx.next().value);
   let parensContent = #``;
   for (let forItem of forExpression) {

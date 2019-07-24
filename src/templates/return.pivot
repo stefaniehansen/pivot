@@ -1,3 +1,4 @@
 export syntax ##return## = ctx => {
-    return #`return`;
+    let ident = ctx.next().value;
+    return #`return ${ident}`;
 };

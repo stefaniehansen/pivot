@@ -2,8 +2,7 @@ export syntax ##if## = (ctx) => {
     let ifExpression = ctx.next().value;
     let ifContent = ctx.next().value;
     let result = #`if ${ifExpression} ${ifContent}`;
-
-    // Else if
+    
     // Extract the else in case we are about to see an else if.
     let elseKeyword = ctx.next().value;
     let isItElseIf = ctx.next().value;

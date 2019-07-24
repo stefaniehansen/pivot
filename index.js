@@ -42,7 +42,7 @@ if (!outDir) {
 let importStatement = generateImports(programmingLanguage, humanLanguage);
 
 function isJavascriptFile(fileName) {
-    return path.extname(fileName) === 'js';
+    return path.extname(fileName) === '.js';
 }
 
 // Keep track of current target directory (mirrors current working directory)
