@@ -35,15 +35,15 @@
   ],
   "homepage": "https://github.com/stefaniehansen/pivot#readme",
   "devDependencies": {
-    "@sweet-js/cli": "^3.0.13",
-    "@sweet-js/helpers": "^4.0.1",
     "npm-run-all": "^4.1.5",
-    "npx": "^10.2.0"
   },
   "dependencies": {
     "concat": "^1.0.3",
     "jsonfile": "^5.0.0",
     "readdirp": "^3.1.1",
-    "yargs": "^13.3.0"
+    "npx": "^10.2.0",
+    "yargs": "^13.3.0",
+    "@sweet-js/cli": "^3.0.13",
+    "@sweet-js/helpers": "^4.0.1"
   }
 }
