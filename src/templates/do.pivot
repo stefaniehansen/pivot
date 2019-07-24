@@ -1,0 +1,14 @@
+syntax ##do## = ctx => {
+    // Do
+    let doContent = ctx.next().value;
+
+    // While
+    let whileKeyword = ctx.next().value;
+    if (unwrap(whileKeyword).value !== '##while##') {
+        throw new Error('Do is missing while');
+    }
+    let whileExpression = ctx.next().value;
+    let result = #`do ${doContent} while ${whileExpression}`
+
+    return result
+}

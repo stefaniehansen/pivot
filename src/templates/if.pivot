@@ -4,12 +4,14 @@ export syntax ##if## = (ctx) => {
     let result = #`if ${ifExpression} ${ifContent}`;
     
     // Extract the else in case we are about to see an else if.
+    let mark = ctx.mark();
     let elseKeyword = ctx.next().value;
     let isItElseIf = ctx.next().value;
     while (unwrap(elseKeyword).value === '##else##' && 
            unwrap(isItElseIf).value === '##if##') {
         let elseIfExpression = ctx.next().value;
         let elseIfContent = ctx.next().value;
+        mark = ctx.mark();
         elseKeyword = ctx.next().value;
         isItElseIf = ctx.next().value;
         result = result.concat(#`else if ${elseIfExpression} ${elseIfContent}`)
@@ -19,6 +21,9 @@ export syntax ##if## = (ctx) => {
         // At this point the isItElseIf contains the else content
         let elseContent = isItElseIf;
         result = result.concat(#`else ${elseContent}`)
+    } else {
+        // If we don't find else, reset to before so we don't eat extra tokens
+        ctx.reset(mark)
     }
     
     return result

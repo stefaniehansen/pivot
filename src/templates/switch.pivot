@@ -1,19 +1,26 @@
 export syntax ##switch## = ctx => {
-    let result = #``;
     let switchExpression = ctx.next().value;
-    result = result.concat(#`##switch## ${switchExpression} {}`);
-
+    let result = #`switch ${switchExpression}`;
     // `Expand the switch content and iterate on it
+    let switchResult = #``
     let switchContent = ctx.contextify(ctx.next().value);
     for (let switchItem of switchContent) {
-        if(unwrap(switchItem).value === ##case##{
-            
-        }
-        else if(unwrap(switchItem).value === ##default##){
-
-        }
-        else{
-
+        switch (unwrap(switchItem).value) {
+            case '##case##':
+                let caseExpression = switchContent.next().value;
+                switchResult = switchResult.concat(#`case ${caseExpression}`);
+                break;
+            case '##default##':
+                let defaultExpression = switchContent.next().value;
+                switchResult = switchResult.concat(#`default ${defaultExpression}`);
+                break;
+            case '##break##':
+                switchResult = switchResult.concat(#`break`);
+                break;
+            default:
+                switchResult = switchResult.concat(#`${switchItem}`)
         }
     }
+
+    return #`${result} {${switchResult}}`;
 }
