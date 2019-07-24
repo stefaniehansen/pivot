@@ -27,8 +27,7 @@ export syntax agar = (ctx) => {
     let ifExpression = ctx.next().value;
     let ifContent = ctx.next().value;
     let result = #`if ${ifExpression} ${ifContent}`;
-
-    // Else if
+    
     // Extract the else in case we are about to see an else if.
     let elseKeyword = ctx.next().value;
     let isItElseIf = ctx.next().value;
@@ -53,6 +52,13 @@ export syntax agar = (ctx) => {
 export syntax vapas = ctx => {
     let ident = ctx.next().value;
     return #`return ${ident}`;
+};
+export syntax feko = ctx => {
+    let ident = ctx.next().value;
+    return #`throw ${ident}`;
+};
+export syntax sahi = ctx => {
+    return #`true`;
 };
 // Try catch finally
 export syntax prayas = ctx => {

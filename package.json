@@ -10,7 +10,11 @@
     "test": "npm-run-all --parallel test:* ",
     "test:spanish": "npx pivot --hl spanish --i test-spanish --o dist-spanish",
     "test:hindi": "npx pivot --hl hindi --i test-hindi --o dist-hindi",
-    "templatize": "npx node ./src/utils/templatizer.js"
+    "templatize": "npx node ./src/utils/templatizer.js",
+    "execute": "npm-run-all execute:*",
+    "execute:hindi": "node dist-hindi/test-hindi.js",
+    "execute:spanish": "node dist-spanish/test-spanish.js",
+    "compile": "npm run test && npm run execute"
   },
   "repository": {
     "type": "git",
