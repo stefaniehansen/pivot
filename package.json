@@ -1,6 +1,6 @@
 {
   "name": "pivotify",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Enable anyone in the world to learn how to program by removing the language barrier inherent to English based programming languages",
   "main": "index.js",
   "bin": {
@@ -30,7 +30,8 @@
   "files": [
     "rules",
     "src",
-    "bin"
+    "bin",
+    "language-maps"
   ],
   "homepage": "https://github.com/stefaniehansen/pivot#readme",
   "devDependencies": {
