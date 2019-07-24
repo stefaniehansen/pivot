@@ -5,7 +5,7 @@ export syntax consola = ctx => {
   let logExpression = ctx.next().value;
   let consoleParensExpression = ctx.next().value;
 
-  if (unwrap(logExpression).value === "logear") {
+  if (unwrap(logExpression).value === "escribe") {
       return #`console.log ${consoleParensExpression}`;
   }
   else {
