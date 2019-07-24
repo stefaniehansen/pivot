@@ -17,7 +17,7 @@ var fileUtils = require('./src/utils/file-utils');
 // Run the target file through Sweet.js and produce transpiled files (overwrite intermediate file).
 
 module.exports = function (outDir, input, humanLanguage, programmingLanguage) {
-// If the user doesn't specify an output directory, use dist-pivot by default
+    // If the user doesn't specify an output directory, use dist-pivot by default
     if (!outDir) {
         outDir = 'dist-pivot';
     }
@@ -26,24 +26,24 @@ module.exports = function (outDir, input, humanLanguage, programmingLanguage) {
         programmingLanguage = 'javascript';
     }
 
-// Generate import statement for rules.
+    // Generate import statement for rules.
     let importStatement = generateImports(programmingLanguage, humanLanguage);
 
-// Keep track of current target directory (mirrors current working directory)
-    function getTargetDir(currentPath) {
-        let basePath = currentPath.fullPath.split(input)[0];
-        let currentPosition = currentPath.fullPath.split(input)[1];
-        let targetPath = path.join(basePath, outDir, currentPosition);
+    function isJavascriptFile(entry) {
+        return path.extname(entry.basename) === '.js';
+    }
+
+    // Keep track of current target directory (mirrors current working directory)
+    function getTargetFilePath(currentPath) {
+        let targetPath = currentPath.fullPath.replace(input, outDir);
         return targetPath;
     }
 
     function transpileFile(entry) {
-        let targetDir = getTargetDir(entry);
-        let targetFilePath = `${targetDir}${entry.basename}`;
-        fileUtils.makeDirIfNotExists(targetDir);
+        let targetFilePath = getTargetFilePath(entry);
         // Write syntax rule imports into target dir files
         fsProm.writeFile(targetFilePath, importStatement, 'utf8')
-        // Concatenate target dir files containing import statements with base file content
+            // Concatenate target dir files containing import statements with base file content
             .then(concatFiles([targetFilePath, entry.fullPath], targetFilePath))
             // Run the transpiler on each file and write over it in target directory.
             .then(exec(`npx sjs ${targetFilePath} --out-file ${targetFilePath}`, function (err, stdout, stderr) {
@@ -58,14 +58,19 @@ module.exports = function (outDir, input, humanLanguage, programmingLanguage) {
             })
     }
 
-// Recursive directory scan
+    // Recursive directory scan
     async function read() {
         // Create initial output directory (using command line input)
         fileUtils.makeDirIfNotExists(outDir);
         // Read input directory recursively
-        for await (const entry of readdirp(input, {fileFilter: '*.js', types: 'files_directories'})) {
-            transpileFile(entry);
-
+        for await (const entry of readdirp(input, {fileFilter: '*.js', type: 'files_directories'})) {
+            if (isJavascriptFile(entry)) {
+                transpileFile(entry);
+            } else {
+                // We are looking at a directory
+                let targetFilePath = getTargetFilePath(entry);
+                fileUtils.makeDirIfNotExists(targetFilePath);
+            }
         }
     }
 

@@ -5,7 +5,7 @@ var jsonFile = require('jsonfile');
 function makeDirIfNotExists(dir) {
     if (!fs.existsSync(dir)) {
         try {
-            fs.mkdirSync(dir);
+            fs.mkdirSync(dir, { recursive: true });
         } catch (error) {
             console.log(error)
         }
