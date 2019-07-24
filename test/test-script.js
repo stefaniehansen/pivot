@@ -31,5 +31,5 @@ syntax variable = ctx => {
 para (variable i = 0; i < 5; i++)
 {
     variable testing = 3;
-    console.log("It Works: " + 3);
+    console.log("It Works: " + i);
 }
