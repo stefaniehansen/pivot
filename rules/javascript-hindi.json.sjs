@@ -1,6 +1,6 @@
 'lang sweet.js';
 import { fromKeyword, unwrap, isKeyword, fromIdentifier } from '@sweet-js/helpers' for syntax
-export syntax para = ctx => {
+export syntax keliye = ctx => {
   let forExpression = ctx.contextify(ctx.next().value);
   let parensContent = #``;
   for (let forItem of forExpression) {
@@ -19,20 +19,21 @@ export syntax para = ctx => {
   
   return result;
 };
-export syntax funcion = ctx => {
+export syntax function = ctx => {
     return #`function`;
 };
 
-export syntax si = (ctx) => {
+export syntax agar = (ctx) => {
     let ifExpression = ctx.next().value;
     let ifContent = ctx.next().value;
     let result = #`if ${ifExpression} ${ifContent}`;
 
+    // Else if
     // Extract the else in case we are about to see an else if.
     let elseKeyword = ctx.next().value;
     let isItElseIf = ctx.next().value;
-    while (unwrap(elseKeyword).value === 'sino' && 
-           unwrap(isItElseIf).value === 'si') {
+    while (unwrap(elseKeyword).value === 'magar' && 
+           unwrap(isItElseIf).value === 'agar') {
         let elseIfExpression = ctx.next().value;
         let elseIfContent = ctx.next().value;
         elseKeyword = ctx.next().value;
@@ -40,7 +41,7 @@ export syntax si = (ctx) => {
         result = result.concat(#`else if ${elseIfExpression} ${elseIfContent}`)
     }
     
-    if (unwrap(elseKeyword).value === 'sino') {
+    if (unwrap(elseKeyword).value === 'magar') {
         // At this point the isItElseIf contains the else content
         let elseContent = isItElseIf;
         result = result.concat(#`else ${elseContent}`)
@@ -49,18 +50,18 @@ export syntax si = (ctx) => {
     return result
 };
 
-export syntax retorna = ctx => {
+export syntax vapas = ctx => {
     let ident = ctx.next().value;
     return #`return ${ident}`;
 };
 // Try catch finally
-export syntax intenta = ctx => {
+export syntax prayas = ctx => {
     // Try
     let tryContent = ctx.next().value;
 
     // Catch
     let catchKeyword = ctx.next().value;
-    if (unwrap(catchKeyword).value !== 'captura') {
+    if (unwrap(catchKeyword).value !== 'pakad') {
         throw new Error('Try is missing catch');
     }
     let catchExpression = ctx.next().value;
@@ -71,7 +72,7 @@ export syntax intenta = ctx => {
     // Finally (optional)
     let finallyKeyword = ctx.next().value;
     if (finallyKeyword) {
-        if (unwrap(finallyKeyword).value !== 'finalmente') {
+        if (unwrap(finallyKeyword).value !== 'akhirmein') {
             throw new Error('Final part of try has to be finally');
         }
         let finallyContent = ctx.next().value;
@@ -83,6 +84,6 @@ export syntax intenta = ctx => {
 export syntax variable = ctx => {
     return #`var`;
 };
-export syntax mientras = ctx => {
+export syntax jabki = ctx => {
     return #`while`;
 };

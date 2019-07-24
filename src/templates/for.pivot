@@ -1,0 +1,19 @@
+export syntax ##for## = ctx => {
+  let forExpression = ctx.contextify(ctx.next().value);
+  let parensContent = #``;
+  for (let forItem of forExpression) {
+      let unwrappedItem = unwrap(forItem);
+      if(unwrappedItem.value === "##var##"){
+          parensContent = parensContent.concat(#`var`);
+      }
+      else 
+      {
+          parensContent = parensContent.concat(#`${forItem}`);
+      }
+  }
+
+  let forContext = ctx.next().value;
+  let result = #`for (${parensContent}) ${forContext}`;
+  
+  return result;
+};
