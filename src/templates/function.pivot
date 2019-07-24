@@ -1,3 +1,3 @@
 export syntax ##function## = ctx => {
-  return #`function`;
+    return #`function`;
 };
