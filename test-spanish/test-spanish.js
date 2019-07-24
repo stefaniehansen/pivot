@@ -5,19 +5,19 @@ variable x = 2;
 variable y = 3;
 
 intenta{
-consola.logear("suma: " + suma(x, y));
-consola.logear("multiplica: " + multiplica(x, y));
-consola.logear("potencia: " + potencia(x,y));
-consola.logear("Este valor es cierto: " + cierto);
+consola.escribe("suma: " + suma(x, y));
+consola.escribe("multiplica: " + multiplica(x, y));
+consola.escribe("potencia: " + potencia(x,y));
+consola.escribe("Este valor es cierto: " + cierto);
 arrojar "error capturado en captura";
 }
 captura(e)
 {
-    consola.logear(e);
+    consola.escribe(e);
 }
 finalmente
 {
-    consola.logear("finalmente ejecutado");
+    consola.escribe("finalmente ejecutado");
 }
 // FUNCIONES
 funcion suma(x, y){

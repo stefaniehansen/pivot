@@ -5,19 +5,19 @@ variable x = 2;
 variable y = 3;
 
 intenta{
-    console.log("suma: " + suma(x, y));
-    console.log("multiplica: " + multiplica(x, y));
-    console.log("potencia: " + potencia(x,y));
-    console.log("Este valor es cierto: " + cierto);
+    consola.escribe("suma: " + suma(x, y));
+    consola.escribe("multiplica: " + multiplica(x, y));
+    consola.escribe("potencia: " + potencia(x,y));
+    consola.escribe("Este valor es cierto: " + cierto);
     arrojar "error capturado en captura";
 }
 captura(e)
 {
-    console.log(e);
+    consola.escribe(e);
 }
 finalmente
 {
-    console.log("finalmente ejecutado");
+    consola.escribe("finalmente ejecutado");
 }
 // FUNCIONES
 funcion suma(x, y){
