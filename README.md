@@ -41,3 +41,10 @@ As part of this Hackathon project, we have only made a few Javascript keywords a
 
 We are looking to crowd-source the language mappings and translatable keywords available in pivot so please help us achieve this by contributing to this project (see details of how you can help in the DEVELOPMENT.md documentation)!
 
+
+#### TODO: 
+
+* Localize README.md
+* Add bidirectional translation support
+* Support additional programming languages
+
