@@ -1,29 +1,4 @@
 # Ignore everything:
-*
-
-# Except for the themes directories:
-
-!src
-!src/*
-!src/**/*
-!test
-!test/*
-!test/**/*
-!test-chinese
-!test-chinese/*
-!test-chinese/**/*
-!test-hindi
-!test-hindi/*
-!test-hindi/**/*
-!test-spanish
-!test-spanish/*
-!test-spanish/**/*
-!rules
-!rules/*
-!rules/**/*
-!language-maps
-!language-maps/*
-!language-maps/**/*
-!media/*
-!bin
-!bin/*
+node_modules
+dist
+.idea
