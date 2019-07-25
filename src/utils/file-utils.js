@@ -28,7 +28,13 @@ function getFileName(filePath) {
 
 function getMapFiles(mapsDir)
 {
-    return getFiles(mapsDir);
+    var mapFiles = getFiles(mapsDir);
+    // Remove the template language map
+    var index = mapFiles.indexOf('javascript-template.json');
+    if (index !== -1) {
+        mapFiles.splice(index, 1);
+    }
+    return mapFiles;
 }
 
 function getTemplateFiles(templatesDir) {

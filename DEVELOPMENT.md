@@ -5,8 +5,8 @@
 
 ### Creating a Language Map
 Create a language map with a name formatted like `<programming language>-<human language>.json` in `./language-maps`. 
-You may use `javascript-spanish.json` as a guide. The keys are javascript keywords and the values are translated keywords.
-Currently, we only support Javascript transpilation.
+You may use `javascript-template.json` to get started. The keys should be javascript keywords and the values should be 
+translated keywords.  Currently, we only support Javascript transpilation.
 
 ### Contributing a Keyword Syntax Rule
 We use [sweet.js](https://www.sweetjs.org/) to parse and transpile code. Take a look at their documentation to get a sense 
