@@ -24,5 +24,6 @@
 !language-maps
 !language-maps/*
 !language-maps/**/*
+!media/*
 !bin
 !bin/*
