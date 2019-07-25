@@ -47,4 +47,5 @@ We are looking to crowd-source the language mappings and translatable keywords a
 * Localize README.md
 * Add bidirectional translation support
 * Support additional programming languages
+* Accept localized human language names as inputs
 
