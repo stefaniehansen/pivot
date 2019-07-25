@@ -35,7 +35,11 @@ module.exports = function (outDir, input, humanLanguage, programmingLanguage) {
 
     // Keep track of current target directory (mirrors current working directory)
     function getTargetFilePath(currentPath) {
-        let targetPath = currentPath.fullPath.replace(input, outDir);
+        let targetPath = currentPath.fullPath;
+        // Normalize for windows
+        targetPath = targetPath.replace(/\\/g, "/"); 
+        // Replace the input directory with the outdir directory 
+        targetPath = targetPath.replace(input, outDir);
         return targetPath;
     }
 
