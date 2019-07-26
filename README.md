@@ -48,4 +48,5 @@ We are looking to crowd-source the language mappings and translatable keywords a
 * Add bidirectional translation support
 * Support additional programming languages
 * Accept localized human language names as inputs
+* Resolve potential collisions between native language variable names and programming language keywords that would prevent successful transpilation (e.g. A user may name their variable "for" which would not be altered during transpilation and could not execute once transpiled).
 
